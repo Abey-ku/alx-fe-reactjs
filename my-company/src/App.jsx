@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Navbar /> {/* Include the Navbar component */}
+        <Navbar /> 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
