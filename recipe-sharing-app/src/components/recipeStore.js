@@ -1,30 +1,28 @@
-// src/recipeStore.js
 import create from 'zustand';
 
 const useRecipeStore = create((set) => ({
-  recipes: [], // Array to hold all recipes
-  searchTerm: '', // Holds the current search input
-  filteredRecipes: [], // Holds the filtered recipes based on search
+  recipes: [],
+  favorites: [],
+  recommendations: [],
+  
+  // Action to add a recipe to favorites
+  addFavorite: (recipeId) => set((state) => ({
+    favorites: [...state.favorites, recipeId],
+  })),
 
-  // Action to set the search term
-  setSearchTerm: (term) => set({ searchTerm: term }),
+  // Action to remove a recipe from favorites
+  removeFavorite: (recipeId) => set((state) => ({
+    favorites: state.favorites.filter((id) => id !== recipeId),
+  })),
 
-  // Action to filter recipes based on the search term
-  filterRecipes: () =>
-    set((state) => ({
-      filteredRecipes: state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      ),
-    })),
-
-  // Action to add a new recipe
-  addRecipe: (newRecipe) =>
-    set((state) => ({
-      recipes: [...state.recipes, newRecipe],
-      filteredRecipes: [...state.recipes, newRecipe].filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      ),
-    })),
+  // Action to generate personalized recommendations
+  generateRecommendations: () => set((state) => {
+    // Mock recommendation logic based on favorites
+    const recommended = state.recipes.filter(
+      (recipe) => state.favorites.includes(recipe.id) && Math.random() > 0.5
+    );
+    return { recommendations: recommended };
+  }),
 }));
 
 export { useRecipeStore };
