@@ -2,7 +2,7 @@ import React from 'react';
 
 function UserProfile() {
   return (
-    <div className="bg-gray-100 p-4 sm:p-4 md:p-8 max-w-xs sm:max-w-sm md:max-w-m mx-auto my-10 rounded-lg shadow-lg">
+    <div className="bg-gray-100 p-4 sm:p-6 md:p-8 max-w-xs sm:max-w-sm md:max-w-sm mx-auto my-10 rounded-lg shadow-lg">
       <imgimport React from 'react';
 
 function UserProfile() {
