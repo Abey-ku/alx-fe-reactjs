@@ -10,12 +10,12 @@ function App() {
   const handleSearch = async (username) => {
     setLoading(true);
     setError(null);
+    setUser(null);  // Clear previous search results
     try {
       const data = await fetchUserData(username);
       setUser(data);
     } catch (error) {
       setError('Looks like we can’t find the user.');
-      setUser(null);
     } finally {
       setLoading(false);
     }
@@ -25,13 +25,14 @@ function App() {
     <div>
       <h1>GitHub User Search</h1>
       <Search onSearch={handleSearch} />
-      
+
+      {/* Conditional Rendering for Loading, Error, or User Data */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {user && (
         <div>
-          <h2>{user.name}</h2>
-          <img src={user.avatar_url} alt={user.name} width="100" />
+          <h2>{user.login}</h2>
+          <img src={user.avatar_url} alt="User Avatar" width="100" />
           <p>{user.bio}</p>
           <a href={user.html_url} target="_blank" rel="noopener noreferrer">
             View GitHub Profile
